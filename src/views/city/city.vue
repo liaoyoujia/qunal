@@ -2,20 +2,23 @@
   <div class="box">
     <city-header/>
     <city-search :cities="cities"/>
-    <city-list/>
+    <city-list :hotCities="hotCities"/>
+    <city-toggle :cities="cities"/>
   </div>
 </template>
 
 <script type='text/ecmascript-6'>
 import cityHeader from "./cityChildren/cityHeader";
 import citySearch from "./cityChildren/citySearch";
+import cityToggle from "./cityChildren/cityToggle"
 import cityList from "./cityChildren/cityList"
 import axios from "axios";
 
 export default {
   data() {
     return {
-      cities:[]
+      cities:{},
+      hotCities:[]
     };
   },
   methods: {
@@ -26,7 +29,8 @@ export default {
       if(res&&res.data&&res.data.ret){
         let data=res.data.data;
         this.cities=data.cities
-        console.log(this.cities,3123)
+        this.hotCities=data.hotCities
+        console.log(data,3123)
 
       }
     }
@@ -38,7 +42,8 @@ export default {
   components: {
     cityHeader,
     citySearch,
-    cityList
+    cityList,
+    cityToggle
   }
 };
 </script>

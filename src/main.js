@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router/index'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
+import store from './store/store'
 
 import './assets/styles/border.css'
 import './assets/styles/reset.css'
@@ -16,6 +17,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

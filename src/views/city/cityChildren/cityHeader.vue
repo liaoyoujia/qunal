@@ -24,7 +24,7 @@ export default {
 </script>
 
 <style scoped lang='scss'>
-@import "../../../assets/styles/variable.scss";
+@import "~styles/variable.scss";
 .header {
   width: 100%;
   position: relative;

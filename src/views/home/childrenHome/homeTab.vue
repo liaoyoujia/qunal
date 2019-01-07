@@ -55,10 +55,7 @@ export default {
     width: 25%;
     padding:.1rem 0;
     text-align: center;
-    // display: flex;
-    // flex-direction: column;
-    // justify-content:center;
-    // align-items: center;
+    
     img{
     width:1.4rem;
     height:1.4rem;

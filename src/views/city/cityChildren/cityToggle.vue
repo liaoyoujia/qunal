@@ -1,5 +1,5 @@
 <template>
-  <div class="box">
+  <div class="box" ref="box">
     <ul>
       <li
         v-for="(item,index) in dataList"
@@ -19,7 +19,9 @@
 export default {
   data() {
     return {
-      touchStatus: false
+      touchStatus: false,
+      startY: 0,
+      timer: null
     };
   },
 
@@ -32,6 +34,7 @@ export default {
       return dataList;
     }
   },
+
   methods: {
     toggleWrod(e) {
       this.$emit("changeData", e.target.innerText);
@@ -41,7 +44,17 @@ export default {
     },
     handleMove(e) {
       if (this.touchStatus) {
-        console.log(e, 1312312312);
+        if (this.timer) {
+          clearTimeout(this.timer);
+        }
+        this.timer = setTimeout(() => {
+          let toggleY = e.touches[0].clientY;
+          let trueY = toggleY - this.startY;
+          let index = Math.floor(trueY / 20);
+          if (index >= 0 && index < this.dataList.length) {
+            this.$emit("changeData", this.dataList[index]);
+          }
+        }, 16);
       }
     },
     handlEnd() {
@@ -51,7 +64,9 @@ export default {
 
   props: ["cities"],
 
-  mounted() {}
+  mounted() {
+    this.startY = this.$refs.box.offsetTop;
+  }
 };
 </script>  
 

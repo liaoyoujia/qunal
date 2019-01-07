@@ -5,7 +5,7 @@
     </div>
     <div class="search-content" ref="wrapper">
       <ul>
-        <li v-for="(item,index) in list" :key="index" class="city-item border-bottom">{{item.name}}</li>
+        <li v-for="(item,index) in list" :key="index" class="city-item border-bottom" @click="chooseCity(item.name)">{{item.name}}</li>
       </ul>
     </div>
     <div class="search-null" v-if="a">查询不到匹配数据</div>
@@ -14,6 +14,8 @@
 
 <script type='text/ecmascript-6'>
 import BScroll from "better-scroll";
+import {mapMutations } from "vuex";
+
 export default {
   data() {
     return {
@@ -24,10 +26,15 @@ export default {
     };
   },
   mounted() {
-    this.scroll = new BScroll(this.$refs.wrapper, { scrollY: true });
+    this.scroll = new BScroll(this.$refs.wrapper, { scrollY: true,click:true });
   },
   props: ["cities"],
   methods: {
+     ...mapMutations(["changeCity"]),
+    chooseCity(name){
+      this.changeCity(name)
+       this.$router.push('/')
+    },
     changeList(adc) {
       this.$emit("hideList", adc);
     }
@@ -39,13 +46,15 @@ export default {
         clearTimeout(this.timer);
       }
       if (newValue !== "") {
-        this.a = true;
         this.changeList();
+        this.a = true;
+
       }
       if (newValue == "") {
         this.list = [];
-        this.a = false;
         this.changeList(123);
+        this.a = false;
+
 
         return false;
       }
@@ -63,7 +72,7 @@ export default {
           });
         }
         this.list = arrs;
-      }, 200);
+      }, 0);
     }
   }
 };
@@ -86,7 +95,6 @@ export default {
     }
   }
   .search-content {
-    // z-index: 99;
     overflow: hidden;
     position: absolute;
     top: 2.26rem;

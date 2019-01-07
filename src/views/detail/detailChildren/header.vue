@@ -40,7 +40,7 @@ export default {
 </script>
 
 <style scoped lang='scss'>
-@import "../../../assets/styles/variable.scss";
+@import "~styles/variable.scss";
 .out {
   position: fixed;
   top: 0;

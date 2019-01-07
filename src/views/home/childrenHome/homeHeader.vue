@@ -8,22 +8,27 @@
       <input type="text" placeholder="输入城市/景点/游玩主题">
     </div>
     <router-link tag="div" to="/cityIn" class="header-right">
-      <span>鞍山</span>
+      <span>{{city}}</span>
       <i class="iconfont arrow-icon">&#xe6dc;</i>
     </router-link>
   </div>
 </template>
 
 <script type='text/ecmascript-6'>
+import { mapState } from "vuex";
+
 export default {
   data() {
     return {};
+  },
+  computed: {
+    ...mapState(['city'])
   }
 };
 </script>
 
 <style scoped lang='scss'>
-@import "../../../assets/styles/variable.scss";
+@import "~styles/variable.scss";
 input::-webkit-input-placeholder {
   color: #aaa;
   font-size: 0.26rem;
@@ -62,7 +67,6 @@ input::-webkit-input-placeholder {
     }
   }
   .header-right {
-    // flex:1;
     padding: 0 0.18rem;
     .arrow-icon {
       font-size: 0.26rem;

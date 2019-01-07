@@ -5,13 +5,13 @@
       <div class="current">
         <div class="title">当前城市</div>
         <div class="address">
-          <span>当涂</span>
+          <span>{{city}}</span>
         </div>
       </div>
       <div class="hot">
         <div class="title">热门城市</div>
         <div class="address">
-          <div class="hot-item" v-for="(item,index) in hotCities" :key="index">{{item.name}}</div>
+          <div class="hot-item" v-for="(item,index) in hotCities" :key="index" @click="chooseCity(item.name)">{{item.name}}</div>
         </div>
       </div>
       <div class="content">
@@ -26,10 +26,14 @@
 
 <script type='text/ecmascript-6'>
 import BScroll from "better-scroll";
+import { mapState, mapMutations } from "vuex";
 
 export default {
   data() {
     return {};
+  },
+  computed: {
+    ...mapState(["city"])
   },
 
   props: {
@@ -40,15 +44,21 @@ export default {
   watch: {
     changeString(newValue) {
       if (newValue != "") {
-        console.log(newValue, 11111111);
         let ele = this.$refs[newValue][0];
         this.scroll.scrollToElement(ele);
       }
     }
   },
+  methods: {
+    ...mapMutations(["changeCity"]),
+    chooseCity(name) {
+      this.changeCity(name);
+      this.$router.push('/')
+    }
+  },
 
   mounted() {
-    this.scroll = new BScroll(this.$refs.box, { scrollY: true });
+    this.scroll = new BScroll(this.$refs.box, { scrollY: true ,click:true});
   }
 };
 </script>

@@ -6,7 +6,7 @@
       :hotCities="hotCities"
       :cities="cities"
       :changeString="changeString"
-      :v-show="dataList"
+      v-show="dataList"
     />
     <city-toggle v-show="dataList" :cities="cities" @changeData="changeData"/>
   </div>
